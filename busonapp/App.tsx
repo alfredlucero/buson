@@ -1,70 +1,41 @@
 import React from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { NavigationNativeContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { ScreenDirectory } from "./screens/screenDirectory";
+import IntroScreen from "./screens/Intro";
+import LoginScreen from "./screens/Login";
+import SignupScreen from "./screens/Signup";
+import HomeScreen from "./screens/Home";
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
-    <View style={styles.landingContainer}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.header}>Buson</Text>
-        <Text style={styles.subHeader}>A secure box for your mail drops!</Text>
-      </View>
-
-      <View style={styles.authContainer}>
-        <View style={styles.signupButton}>
-          <Button onPress={() => {}} title="Sign Up" color="steelblue" />
-        </View>
-        <View style={styles.loginButton}>
-          <Button onPress={() => {}} title="Login" color="#fcfcfc" />
-        </View>
-      </View>
-    </View>
+    <NavigationNativeContainer>
+      <Stack.Navigator initialRouteName="Intro">
+        <Stack.Screen
+          name={ScreenDirectory.Intro}
+          component={IntroScreen}
+          options={{ title: "Buson" }}
+        />
+        <Stack.Screen
+          name={ScreenDirectory.Login}
+          component={LoginScreen}
+          options={{ title: "Log In" }}
+        />
+        <Stack.Screen
+          name={ScreenDirectory.Signup}
+          component={SignupScreen}
+          options={{ title: "Sign Up" }}
+        />
+        <Stack.Screen
+          name={ScreenDirectory.Home}
+          component={HomeScreen}
+          options={{ title: "Home" }}
+        />
+      </Stack.Navigator>
+    </NavigationNativeContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  landingContainer: {
-    flex: 1,
-  },
-  headerContainer: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  header: {
-    color: "steelblue",
-    fontWeight: "bold",
-    fontSize: 35,
-    marginBottom: 10,
-  },
-  subHeader: {
-    color: "#595959",
-    fontSize: 20,
-  },
-  authContainer: {
-    flexGrow: 0,
-    flexShrink: 0,
-    flexBasis: 90,
-    width: "100%",
-    flexDirection: "row",
-  },
-  signupButton: {
-    width: "50%",
-    justifyContent: "center",
-    alignItems: "center",
-    borderColor: "steelblue",
-    borderWidth: 2,
-    borderRadius: 5,
-  },
-  loginButton: {
-    width: "50%",
-    backgroundColor: "steelblue",
-    justifyContent: "center",
-    alignItems: "center",
-    borderWidth: 2,
-    borderColor: "transparent",
-    borderRadius: 5,
-  },
-});
 
 export default App;
